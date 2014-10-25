@@ -22,8 +22,6 @@ def load_favorites(config):
             config.get('twitter', 'AccessTokenKey'),
             config.get('twitter', 'AccessTokenSecret'))
 
-    print config.items('twitter')
-
     r = api.request('favorites/list', {'count': 200})
     return list(r)
 
