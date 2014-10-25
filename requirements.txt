@@ -1,0 +1,3 @@
+Jinja2==2.7.3
+TwitterAPI==2.2.5
+opengraph==0.5

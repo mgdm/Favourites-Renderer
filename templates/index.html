@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf8">
+        <title>Twitter favourites with links</title>
+
+        <style>
+            body {
+                font-family: "Source Sans Pro", "Helvetica", sans-serif;
+            }
+
+            .favorites div.favorite:nth-child(odd) {
+                background-color: #eee;
+            }
+
+            .favorite {
+                margin: 10px 0px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <h1>Twitter links</h1>
+
+        <div class="favorites">
+        {% for favorite in favorites %}
+        <div class="favorite">
+            {{ favorite.text|urlize|twitter_links }}
+
+            {% if favorite.entities.urls %}
+                <ul>
+                    {% for url in favorite.entities.urls %}
+                    <li>
+                        {% if url_data[url.expanded_url] %}
+                            <div>
+                            {% set site = url_data[url.expanded_url] %}
+                            <h3>{{ site.title|e }} </h3>
+                            <p>{{ site.description|e }}</p>
+                            </div>
+                        {% endif %}
+                        <a href="{{ url.expanded_url }}">{{ url.expanded_url|e }}</a>
+                    </li>
+
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            Via 
+            <a href="https://twitter.com/{{ favorite.user.screen_name }}">@{{ favorite.user.screen_name|e }}</a>
+            on 
+            <a href="https://twitter.com/{{ favorite.user.screen_name }}/status/{{ favorite.id_str }}">{{ favorite.created_at|e }}</a>
+        </div>
+        {% endfor %}
+        </div>
+    </body>
+</html>
+
+
