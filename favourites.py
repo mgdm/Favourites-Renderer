@@ -66,7 +66,7 @@ def get_all_url_data(favorites):
     return data
 
 def render_favorites(favorites):
-    env = Environment(loader=PackageLoader('render', 'templates'))
+    env = Environment(loader=PackageLoader('favourites', 'templates'))
     env.filters['twitter_links'] = twitter_links
 
     favorites = [fav for fav in favorites if 'entities' in fav and len(fav['entities']['urls']) > 0]
