@@ -36,7 +36,7 @@
                             <div>
                             {% set site = url_data[url.expanded_url] %}
                             <h3>{{ site.title|e }} </h3>
-                            <p>{{ site.description|e }}</p>
+                            <p>{{ site.description|truncate|e }}</p>
                             </div>
                         {% endif %}
                         <a href="{{ url.expanded_url }}">{{ url.expanded_url|e }}</a>
