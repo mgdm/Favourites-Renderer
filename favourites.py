@@ -55,6 +55,7 @@ def get_all_url_data(favorites):
     data = {}
     for fav in favorites:
         for url in [url['expanded_url'] for url in fav['entities']['urls']]:
+            url = url.encode('utf-8')
             if url in cache:
                 data[url] = cache[url]
             else:
@@ -75,7 +76,7 @@ def render_favorites(favorites):
     print template.render(favorites=favorites, url_data=url_data).encode('utf-8')
 
 def twitter_links(tweet):
-    return re.sub(r'(\s)@([a-zA-Z0-9_]+)', r'\1<a href="https://twitter.com/\2">@\2</a>', tweet)
+    return re.sub(r'(\s?)@([a-zA-Z0-9_]+)', r'\1<a href="https://twitter.com/\2">@\2</a>', tweet)
 
 
 if __name__ == '__main__':
